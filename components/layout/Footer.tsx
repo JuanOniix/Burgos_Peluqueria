@@ -26,16 +26,14 @@ export function Footer() {
               {siteConfig.tagline}. Agenda tu cita en segundos y déjanos
               cuidar tu imagen.
             </p>
-            <div className="mt-6">
-              <WhatsAppButton size="sm" className="px-4 py-2 text-sm" />
-            </div>
             <div className="mt-6 flex items-center gap-3">
+              <WhatsAppButton size="sm" className="px-4 py-2 text-sm" />
               <Link
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Síguenos en Instagram"
-                className="flex size-9 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
               >
                 <InstagramIcon className="size-4" />
               </Link>
@@ -44,7 +42,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Síguenos en Facebook"
-                className="flex size-9 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
               >
                 <FacebookIcon className="size-4" />
               </Link>
