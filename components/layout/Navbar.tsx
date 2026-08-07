@@ -32,7 +32,7 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="#inicio" className="flex items-center">
           <Image
-            src="/logo.jpg"
+            src="/logo.png"
             alt={siteConfig.name}
             width={160}
             height={163}
