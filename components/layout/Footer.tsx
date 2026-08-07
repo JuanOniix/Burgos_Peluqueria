@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MapPin, Clock, Phone } from "lucide-react";
 
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { FacebookIcon, InstagramIcon } from "@/components/shared/SocialIcons";
 import { siteConfig } from "@/lib/config";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
@@ -27,6 +28,26 @@ export function Footer() {
             </p>
             <div className="mt-6">
               <WhatsAppButton size="sm" className="px-4 py-2 text-sm" />
+            </div>
+            <div className="mt-6 flex items-center gap-3">
+              <Link
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Síguenos en Instagram"
+                className="flex size-9 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                <InstagramIcon className="size-4" />
+              </Link>
+              <Link
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Síguenos en Facebook"
+                className="flex size-9 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                <FacebookIcon className="size-4" />
+              </Link>
             </div>
           </div>
 

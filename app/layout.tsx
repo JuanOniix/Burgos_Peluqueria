@@ -74,6 +74,9 @@ const jsonLd = {
     opens: siteConfig.hours.opens,
     closes: siteConfig.hours.closes,
   })),
+  sameAs: [siteConfig.social.instagram, siteConfig.social.facebook].filter(
+    Boolean
+  ),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
