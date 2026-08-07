@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Burgos Peluquería
 
-## Getting Started
+Sitio web de una sola página construido con Next.js, TypeScript, Tailwind CSS y shadcn/ui. Objetivo: mostrar los servicios del salón y convertir visitas en citas agendadas por WhatsApp.
 
-First, run the development server:
+## Desarrollo local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editar el contenido
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Todo el contenido del negocio está centralizado, así que **no hace falta tocar componentes** para actualizar textos, teléfono, dirección u horario:
 
-## Learn More
+| Qué editar | Archivo |
+| --- | --- |
+| Nombre, WhatsApp, dirección, horario, historia, valores | [`lib/config.ts`](lib/config.ts) |
+| Servicios (Cortes, Coloración, Balayage, etc.) | [`data/services.ts`](data/services.ts) |
+| Fotos de la galería | [`data/gallery.ts`](data/gallery.ts) |
+| Opiniones de clientes | [`data/testimonials.ts`](data/testimonials.ts) |
 
-To learn more about Next.js, take a look at the following resources:
+### Reemplazar las fotos placeholder
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Todas las imágenes son fotos de stock de Unsplash usadas como placeholder. Para usar fotos reales del salón:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Coloca las imágenes en `public/` (por ejemplo `public/fotos/corte-1.jpg`).
+2. En `data/services.ts`, `data/gallery.ts` o en el componente `About`, cambia el valor de `image`/`src` a la ruta local, por ejemplo `"/fotos/corte-1.jpg"`.
 
-## Deploy on Vercel
+No se requiere ningún otro cambio: `next/image` optimiza automáticamente tanto imágenes locales como remotas ya configuradas (Unsplash).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Actualizar el mapa y la ciudad
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`lib/config.ts` → `address.full` se usa para el mapa de Google embebido. Si agregas ciudad/país (por ejemplo `"Cra 57 # 3-22, Bogotá, Colombia"`), el mapa será más preciso.
+
+### Dominio del sitio (SEO)
+
+Cuando el sitio tenga dominio propio, actualiza `lib/config.ts` → `url`. Ese valor alimenta las etiquetas Open Graph, el `sitemap.xml` y el `robots.txt`.
+
+## Estructura del proyecto
+
+```
+app/            # Rutas, layout raíz, metadata, sitemap y robots
+components/
+  layout/       # Navbar y Footer
+  sections/     # Hero, Services, Gallery, About, Testimonials, Location
+  shared/       # Botones de WhatsApp, animaciones de scroll, encabezados
+  ui/           # Componentes base de shadcn/ui
+data/           # Servicios, galería y testimonios
+lib/            # Configuración central del negocio y helper de WhatsApp
+```
+
+## Despliegue en Vercel
+
+1. Sube el proyecto a un repositorio de Git (GitHub, GitLab o Bitbucket).
+2. En [vercel.com/new](https://vercel.com/new), importa el repositorio.
+3. Vercel detecta Next.js automáticamente — no se requiere configuración adicional.
+4. Tras el primer despliegue, actualiza `lib/config.ts` → `url` con el dominio asignado y vuelve a desplegar.
+
+## Comandos
+
+```bash
+npm run dev     # servidor de desarrollo
+npm run build   # build de producción
+npm run start   # servidor de producción (tras build)
+npm run lint    # linter
+```
