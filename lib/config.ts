@@ -6,7 +6,7 @@
 export const siteConfig = {
   name: "Burgos Peluquería",
   shortName: "Burgos",
-  tagline: "Estilo y cuidado profesional para tu cabello",
+  tagline: "Estilo, belleza y confianza",
   description:
     "En Burgos Peluquería cuidamos tu imagen con cortes, coloración, balayage, keratina, peinados y barbería. Agenda tu cita por WhatsApp.",
 
@@ -21,7 +21,7 @@ export const siteConfig = {
   address: {
     line: "Cra 57 # 3-22",
     // Completa ciudad/país aquí cuando los tengas para mejorar precisión del mapa.
-    full: "Cra 57 # 3-22, Colombia",
+    full: "Cra 57 # 3-22,Cali, Colombia",
   },
 
   hours: {
@@ -36,13 +36,13 @@ export const siteConfig = {
       "Thursday",
       "Friday",
       "Saturday",
-      "Sunday",
+     
     ],
   },
 
   social: {
-    instagram: "",
-    facebook: "",
+    instagram: "https://www.instagram.com/burgos_peluqueria/",
+    facebook: "https://www.facebook.com/profile.php?id=100064290690648",
   },
 
   // Texto de ejemplo — reemplázalo por la historia real del salón.
