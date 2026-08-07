@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Menu, Scissors } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,12 +30,15 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link
-          href="#inicio"
-          className="flex items-center gap-2 font-heading text-lg font-semibold tracking-tight text-foreground"
-        >
-          <Scissors className="size-5 text-primary" />
-          {siteConfig.shortName}
+        <Link href="#inicio" className="flex items-center">
+          <Image
+            src="/logo.jpg"
+            alt={siteConfig.name}
+            width={160}
+            height={163}
+            priority
+            className="h-11 w-auto object-contain"
+          />
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">

@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Clock, Phone, Scissors } from "lucide-react";
+import { MapPin, Clock, Phone } from "lucide-react";
 
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { siteConfig } from "@/lib/config";
@@ -13,10 +14,13 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2 font-heading text-xl font-semibold text-foreground">
-              <Scissors className="size-5 text-primary" />
-              {siteConfig.name}
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt={siteConfig.name}
+              width={200}
+              height={204}
+              className="h-16 w-auto object-contain"
+            />
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
               {siteConfig.tagline}. Agenda tu cita en segundos y déjanos
               cuidar tu imagen.
