@@ -17,9 +17,9 @@ export function Footer() {
             <Image
               src="/logo.png"
               alt={siteConfig.name}
-              width={200}
-              height={204}
-              className="h-16 w-auto object-contain"
+              width={260}
+              height={265}
+              className="h-24 w-auto object-contain"
             />
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
               {siteConfig.tagline}. Agenda tu cita en segundos y déjanos
