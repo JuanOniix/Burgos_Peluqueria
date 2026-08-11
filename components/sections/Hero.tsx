@@ -56,6 +56,15 @@ export function Hero() {
             Ver servicios
           </Link>
         </div>
+
+        <div className="mt-12 flex items-center gap-3 border-t border-white/20 pt-6">
+          <span className="font-heading text-3xl font-medium text-white">
+            {siteConfig.stats.happyClients}
+          </span>
+          <span className="max-w-[10rem] text-xs text-white/70">
+            {siteConfig.stats.happyClientsLabel}
+          </span>
+        </div>
       </motion.div>
     </section>
   );

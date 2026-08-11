@@ -45,6 +45,12 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/profile.php?id=100064290690648",
   },
 
+  // Cifra de ejemplo — reemplázala por un número real (o quita la sección) antes de publicar.
+  stats: {
+    happyClients: "500+",
+    happyClientsLabel: "Clientas y clientes felices",
+  },
+
   // Texto de ejemplo — reemplázalo por la historia real del salón.
   about: {
     paragraphs: [

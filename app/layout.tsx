@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloatingButton } from "@/components/shared/WhatsAppFloatingButton";
+import { CartProvider } from "@/lib/cart-context";
 import { siteConfig } from "@/lib/config";
 
 const inter = Inter({
@@ -90,10 +91,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppFloatingButton />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <WhatsAppFloatingButton />
+        </CartProvider>
       </body>
     </html>
   );

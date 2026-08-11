@@ -12,12 +12,14 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { CartDrawer } from "@/components/shared/CartDrawer";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { siteConfig } from "@/lib/config";
 
 const navLinks = [
   { href: "#inicio", label: "Inicio" },
   { href: "#servicios", label: "Servicios" },
+  { href: "#tienda", label: "Tienda" },
   { href: "#galeria", label: "Galería" },
   { href: "#nosotros", label: "Nosotros" },
   { href: "#opiniones", label: "Opiniones" },
@@ -54,21 +56,24 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-3 md:flex">
+          <CartDrawer />
           <WhatsAppButton size="sm" className="px-4 py-2 text-sm">
             Agenda tu cita
           </WhatsAppButton>
         </div>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          aria-label="Abrir menú"
-          onClick={() => setOpen(true)}
-        >
-          <Menu className="size-5" />
-        </Button>
+        <div className="flex items-center gap-1 md:hidden">
+          <CartDrawer />
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Abrir menú"
+            onClick={() => setOpen(true)}
+          >
+            <Menu className="size-5" />
+          </Button>
+        </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetContent side="right" className="w-72">
