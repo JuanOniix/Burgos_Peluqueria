@@ -37,6 +37,10 @@
   --color-primary: var(--primary);
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
+  --color-footer-background: var(--footer-background);
+  --color-footer-foreground: var(--footer-foreground);
+  --color-footer-muted: var(--footer-muted);
+  --color-footer-border: var(--footer-border);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -72,6 +76,10 @@
   --ring: oklch(0.439 0.108 155 / 0.5);
   --gold: oklch(0.793 0.163 83.3);
   --gold-foreground: oklch(0.25 0.05 83);
+  --footer-background: oklch(0.15 0.008 155);
+  --footer-foreground: oklch(0.97 0.004 155);
+  --footer-muted: oklch(0.68 0.01 155);
+  --footer-border: oklch(1 0 0 / 10%);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);

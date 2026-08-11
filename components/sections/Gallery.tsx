@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { galleryImages } from "@/data/gallery";
@@ -47,6 +48,29 @@ export function Gallery() {
             </AnimatedSection>
           ))}
         </div>
+
+        <AnimatedSection delay={0.1} className="mt-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium tracking-wide text-primary uppercase">
+              Transformaciones
+            </p>
+            <h3 className="mt-2 font-heading text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+              Antes y después
+            </h3>
+            <p className="mt-3 text-sm text-muted-foreground sm:text-base">
+              Desliza para ver el cambio. Así queda el cabello con nuestro
+              trabajo.
+            </p>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl">
+            <BeforeAfterSlider
+              beforeSrc="https://images.unsplash.com/photo-1499557354967-2b2d8910bcca"
+              afterSrc="https://images.unsplash.com/photo-1658322558683-2524c9b62d04"
+              beforeAlt="Cabello antes del tratamiento"
+              afterAlt="Cabello después del tratamiento en Burgos Peluquería"
+            />
+          </div>
+        </AnimatedSection>
       </div>
 
       <Dialog

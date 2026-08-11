@@ -11,18 +11,23 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contacto" className="border-t border-border bg-secondary/40">
+    <footer
+      id="contacto"
+      className="border-t border-footer-border bg-footer-background"
+    >
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Image
-              src="/logo.png"
-              alt={siteConfig.name}
-              width={260}
-              height={265}
-              className="h-24 w-auto object-contain"
-            />
-            <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+            <div className="inline-block rounded-xl bg-white p-3">
+              <Image
+                src="/logo.png"
+                alt={siteConfig.name}
+                width={220}
+                height={224}
+                className="h-16 w-auto object-contain"
+              />
+            </div>
+            <p className="mt-4 max-w-xs text-sm text-footer-muted">
               {siteConfig.tagline}. Agenda tu cita en segundos y déjanos
               cuidar tu imagen.
             </p>
@@ -33,7 +38,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Síguenos en Instagram"
-                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-footer-foreground transition-colors hover:bg-gold hover:text-gold-foreground"
               >
                 <InstagramIcon className="size-4" />
               </Link>
@@ -42,7 +47,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Síguenos en Facebook"
-                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-footer-foreground transition-colors hover:bg-gold hover:text-gold-foreground"
               >
                 <FacebookIcon className="size-4" />
               </Link>
@@ -50,50 +55,50 @@ export function Footer() {
           </div>
 
           <div className="space-y-3 text-sm">
-            <h3 className="font-heading text-base font-medium text-foreground">
+            <h3 className="font-heading text-base font-medium text-footer-foreground">
               Contacto
             </h3>
             <Link
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-2.5 text-muted-foreground hover:text-foreground"
+              className="flex items-start gap-2.5 text-footer-muted hover:text-footer-foreground"
             >
               <Phone className="mt-0.5 size-4 shrink-0" />
               {siteConfig.whatsappNumberDisplay}
             </Link>
-            <p className="flex items-start gap-2.5 text-muted-foreground">
+            <p className="flex items-start gap-2.5 text-footer-muted">
               <MapPin className="mt-0.5 size-4 shrink-0" />
               {siteConfig.address.line}
             </p>
-            <p className="flex items-start gap-2.5 text-muted-foreground">
+            <p className="flex items-start gap-2.5 text-footer-muted">
               <Clock className="mt-0.5 size-4 shrink-0" />
               {siteConfig.hours.display}
             </p>
           </div>
 
           <div className="space-y-3 text-sm">
-            <h3 className="font-heading text-base font-medium text-foreground">
+            <h3 className="font-heading text-base font-medium text-footer-foreground">
               Navegación
             </h3>
-            <ul className="space-y-2 text-muted-foreground">
+            <ul className="space-y-2 text-footer-muted">
               <li>
-                <Link href="#servicios" className="hover:text-foreground">
+                <Link href="#servicios" className="hover:text-footer-foreground">
                   Servicios
                 </Link>
               </li>
               <li>
-                <Link href="#galeria" className="hover:text-foreground">
+                <Link href="#galeria" className="hover:text-footer-foreground">
                   Galería
                 </Link>
               </li>
               <li>
-                <Link href="#nosotros" className="hover:text-foreground">
+                <Link href="#nosotros" className="hover:text-footer-foreground">
                   Nosotros
                 </Link>
               </li>
               <li>
-                <Link href="#ubicacion" className="hover:text-foreground">
+                <Link href="#ubicacion" className="hover:text-footer-foreground">
                   Ubicación
                 </Link>
               </li>
@@ -101,7 +106,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border pt-6 text-center text-xs text-muted-foreground">
+        <div className="mt-12 border-t border-footer-border pt-6 text-center text-xs text-footer-muted">
           © {year} {siteConfig.name}. Todos los derechos reservados.
         </div>
       </div>

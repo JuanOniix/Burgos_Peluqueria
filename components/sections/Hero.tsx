@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { VerticalLabel } from "@/components/shared/VerticalLabel";
 import { siteConfig } from "@/lib/config";
 
 export function Hero() {
@@ -21,33 +22,39 @@ export function Hero() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/25" />
+
+      <div className="absolute top-1/2 left-3 z-10 hidden -translate-y-1/2 sm:block lg:left-6">
+        <VerticalLabel className="text-white/70">
+          Cali · Colombia
+        </VerticalLabel>
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative mx-auto max-w-6xl px-4 py-32 sm:px-6 lg:px-8"
+        className="relative mx-auto w-full max-w-6xl px-4 py-32 sm:px-6 lg:px-16"
       >
-        <div className="max-w-xl">
-          <p className="text-sm font-medium tracking-[0.2em] text-white/80 uppercase">
-            {siteConfig.tagline}
-          </p>
-          <h1 className="mt-4 font-heading text-5xl font-medium tracking-tight text-white sm:text-6xl">
-            {siteConfig.name}
-          </h1>
-          <p className="mt-6 text-lg text-white/85">
-            {siteConfig.description}
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <WhatsAppButton size="lg" className="text-base" />
-            <Link
-              href="#servicios"
-              className="text-sm font-medium text-white/90 underline underline-offset-4 hover:text-white"
-            >
-              Ver servicios
-            </Link>
-          </div>
+        <p className="text-sm font-medium tracking-[0.3em] text-white/75 uppercase">
+          {siteConfig.tagline}
+        </p>
+        <h1 className="mt-5 font-heading text-[3.4rem] leading-[0.95] font-medium tracking-tight text-white sm:text-8xl lg:text-[8.5rem]">
+          Burgos
+          <br />
+          Peluquería
+        </h1>
+        <p className="mt-8 max-w-md text-lg text-white/85">
+          {siteConfig.description}
+        </p>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <WhatsAppButton size="lg" className="text-base" />
+          <Link
+            href="#servicios"
+            className="text-sm font-medium text-white/90 underline underline-offset-4 hover:text-white"
+          >
+            Ver servicios
+          </Link>
         </div>
       </motion.div>
     </section>

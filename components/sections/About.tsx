@@ -5,8 +5,17 @@ import { siteConfig } from "@/lib/config";
 
 export function About() {
   return (
-    <section id="nosotros" className="bg-secondary/40 py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section
+      id="nosotros"
+      className="relative overflow-hidden bg-secondary/40 py-24 sm:py-32"
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-8 left-1/2 -z-0 -translate-x-1/2 font-heading text-[5rem] leading-none font-medium whitespace-nowrap text-foreground/5 select-none sm:text-[8rem] lg:text-[11rem]"
+      >
+        Nosotros
+      </span>
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <AnimatedSection>
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
