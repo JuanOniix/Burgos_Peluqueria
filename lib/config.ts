@@ -36,7 +36,7 @@ export const siteConfig = {
       "Thursday",
       "Friday",
       "Saturday",
-     
+      "Sunday",
     ],
   },
 

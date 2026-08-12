@@ -8,8 +8,17 @@ export type Product = {
 };
 
 /**
- * Catálogo de ejemplo — reemplaza nombres, precios (COP) e imágenes por los
- * productos reales que vende Burgos Peluquería cuando los tengas.
+ * Catálogo de productos de la tienda.
+ *
+ * Cómo actualizar cada producto (sin tocar código):
+ * 1. Foto: reemplaza el archivo correspondiente dentro de /public/products/
+ *    (mismo nombre de archivo, formato .jpg) por la foto real del producto.
+ * 2. name / description / price: edítalos abajo. `price` va en pesos
+ *    colombianos, solo el número, sin puntos ni "$" (ej: 45000).
+ * 3. category: se muestra como etiqueta pequeña sobre el nombre.
+ *
+ * Estos 6 productos y sus fotos son de ejemplo — reemplázalos por el
+ * catálogo real que vende Burgos Peluquería.
  */
 export const products: Product[] = [
   {
@@ -17,7 +26,7 @@ export const products: Product[] = [
     name: "Shampoo Reparador",
     description: "Limpieza suave que repara la fibra capilar dañada.",
     price: 45000,
-    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8",
+    image: "/products/shampoo-reparador.jpg",
     category: "Shampoo",
   },
   {
@@ -25,7 +34,7 @@ export const products: Product[] = [
     name: "Acondicionador Hidratante",
     description: "Hidratación profunda para un cabello suave y manejable.",
     price: 48000,
-    image: "https://images.unsplash.com/photo-1655892817271-c66841c2506e",
+    image: "/products/acondicionador-hidratante.jpg",
     category: "Acondicionador",
   },
   {
@@ -33,7 +42,7 @@ export const products: Product[] = [
     name: "Tratamiento de Keratina",
     description: "Alisado y nutrición profunda para mantener el efecto en casa.",
     price: 85000,
-    image: "https://images.unsplash.com/photo-1517498327491-f903e1e281cd",
+    image: "/products/tratamiento-keratina.jpg",
     category: "Tratamiento",
   },
   {
@@ -41,7 +50,7 @@ export const products: Product[] = [
     name: "Aceite Capilar",
     description: "Brillo y control del frizz, sin dejar sensación grasosa.",
     price: 39000,
-    image: "https://images.unsplash.com/photo-1610595426075-eed5a3f521ee",
+    image: "/products/aceite-capilar.jpg",
     category: "Styling",
   },
   {
@@ -49,7 +58,7 @@ export const products: Product[] = [
     name: "Crema para Peinar",
     description: "Define el peinado con un acabado natural todo el día.",
     price: 36000,
-    image: "https://images.unsplash.com/photo-1624939461078-66a124b3539c",
+    image: "/products/crema-para-peinar.jpg",
     category: "Styling",
   },
   {
@@ -57,7 +66,7 @@ export const products: Product[] = [
     name: "Mascarilla Nutritiva",
     description: "Tratamiento semanal intensivo para cabello debilitado.",
     price: 52000,
-    image: "https://images.unsplash.com/photo-1585232350744-974fc9804d65",
+    image: "/products/mascarilla-nutritiva.jpg",
     category: "Tratamiento",
   },
 ];
