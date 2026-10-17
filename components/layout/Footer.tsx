@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Clock, Phone } from "lucide-react";
 
-import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { AppointmentDialog } from "@/components/shared/AppointmentDialog";
 import { FacebookIcon, InstagramIcon } from "@/components/shared/SocialIcons";
 import { siteConfig } from "@/lib/config";
 import { getWhatsAppLink } from "@/lib/whatsapp";
@@ -32,7 +32,7 @@ export function Footer() {
               cuidar tu imagen.
             </p>
             <div className="mt-6 flex items-center gap-3">
-              <WhatsAppButton size="sm" className="px-4 py-2 text-sm" />
+              <AppointmentDialog size="sm" className="px-4 py-2 text-sm" />
               <Link
                 href={siteConfig.social.instagram}
                 target="_blank"

@@ -2,7 +2,7 @@ import { MapPin, Clock } from "lucide-react";
 
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { AppointmentDialog } from "@/components/shared/AppointmentDialog";
 import { siteConfig } from "@/lib/config";
 
 export function Location() {
@@ -61,7 +61,7 @@ export function Location() {
               </div>
 
               <div className="mt-8">
-                <WhatsAppButton className="w-full justify-center" />
+                <AppointmentDialog className="w-full justify-center" />
               </div>
             </div>
           </AnimatedSection>

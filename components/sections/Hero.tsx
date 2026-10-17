@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { AppointmentDialog } from "@/components/shared/AppointmentDialog";
 import { VerticalLabel } from "@/components/shared/VerticalLabel";
 import { siteConfig } from "@/lib/config";
 
@@ -48,7 +48,7 @@ export function Hero() {
           {siteConfig.description}
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <WhatsAppButton size="lg" className="text-base" />
+          <AppointmentDialog size="lg" className="text-base" />
           <Link
             href="#servicios"
             className="text-sm font-medium text-white/90 underline underline-offset-4 hover:text-white"

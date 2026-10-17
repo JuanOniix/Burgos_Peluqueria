@@ -13,7 +13,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { CartDrawer } from "@/components/shared/CartDrawer";
-import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { AppointmentDialog } from "@/components/shared/AppointmentDialog";
 import { siteConfig } from "@/lib/config";
 
 const navLinks = [
@@ -58,9 +58,9 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <CartDrawer />
-          <WhatsAppButton size="sm" className="px-4 py-2 text-sm">
+          <AppointmentDialog size="sm" className="px-4 py-2 text-sm">
             Agenda tu cita
-          </WhatsAppButton>
+          </AppointmentDialog>
         </div>
 
         <div className="flex items-center gap-1 md:hidden">
@@ -94,9 +94,9 @@ export function Navbar() {
               ))}
             </ul>
             <div className="mt-2 px-4">
-              <WhatsAppButton className="w-full justify-center">
+              <AppointmentDialog className="w-full justify-center">
                 Agenda tu cita
-              </WhatsAppButton>
+              </AppointmentDialog>
             </div>
           </SheetContent>
         </Sheet>

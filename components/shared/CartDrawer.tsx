@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -15,11 +14,114 @@ import {
 } from "@/components/ui/sheet";
 import { useCart } from "@/lib/cart-context";
 import { formatCOP } from "@/lib/utils";
-import { getCartWhatsAppLink } from "@/lib/whatsapp";
+import { getWhatsAppLink } from "@/lib/whatsapp";
+
+type SavedOrder = {
+  orderCode: string;
+  subtotal: number;
+  items: { name: string; quantity: number; lineTotal: number }[];
+};
+
+function isSavedOrder(value: unknown): value is SavedOrder {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "orderCode" in value &&
+    typeof value.orderCode === "string" &&
+    "subtotal" in value &&
+    typeof value.subtotal === "number" &&
+    "items" in value &&
+    Array.isArray(value.items) &&
+    value.items.every(
+      (item) =>
+        typeof item === "object" &&
+        item !== null &&
+        "name" in item &&
+        typeof item.name === "string" &&
+        "quantity" in item &&
+        typeof item.quantity === "number" &&
+        "lineTotal" in item &&
+        typeof item.lineTotal === "number"
+    )
+  );
+}
 
 export function CartDrawer() {
   const [open, setOpen] = useState(false);
-  const { items, itemCount, subtotal, removeItem, setQuantity } = useCart();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [orderCode, setOrderCode] = useState<string | null>(null);
+  const [whatsAppLink, setWhatsAppLink] = useState<string | null>(null);
+  const {
+    items,
+    itemCount,
+    subtotal,
+    removeItem,
+    setQuantity,
+    clearCart,
+  } = useCart();
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          privacyConsent,
+          items: items.map((item) => ({
+            id: item.id,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+      const payload: unknown = await response.json();
+
+      if (!response.ok || !isSavedOrder(payload)) {
+        const message =
+          typeof payload === "object" &&
+          payload !== null &&
+          "error" in payload &&
+          typeof payload.error === "string"
+            ? payload.error
+            : "No pudimos registrar el pedido. Inténtalo nuevamente.";
+        throw new Error(message);
+      }
+
+      setOrderCode(payload.orderCode);
+      const lines = payload.items.map(
+        (item) =>
+          `• ${item.name} x${item.quantity} — ${formatCOP(item.lineTotal)}`
+      );
+      const message = [
+        "Hola, quisiera hacer este pedido:",
+        "",
+        ...lines,
+        "",
+        `Total: ${formatCOP(payload.subtotal)}`,
+        "",
+        `Código de pedido: ${payload.orderCode}`,
+      ].join("\n");
+      setWhatsAppLink(getWhatsAppLink(message));
+      clearCart();
+    } catch (submitError) {
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : "No pudimos registrar el pedido. Inténtalo nuevamente."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <>
@@ -44,7 +146,41 @@ export function CartDrawer() {
             <SheetTitle>Tu carrito</SheetTitle>
           </SheetHeader>
 
-          {items.length === 0 ? (
+          {orderCode && whatsAppLink ? (
+            <div className="flex flex-1 flex-col justify-center gap-4 px-4">
+              <div className="space-y-2 text-center">
+                <ShoppingBag className="mx-auto size-8 text-primary" />
+                <p className="font-medium text-foreground">Pedido registrado</p>
+                <p className="text-sm text-muted-foreground">
+                  Código: {orderCode}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  El pago y la recogida se coordinan con la peluquería.
+                </p>
+              </div>
+              <a
+                href={whatsAppLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center justify-center rounded-full bg-[#25D366] px-5 text-sm font-medium text-white hover:bg-[#1ebe5a]"
+              >
+                Enviar pedido por WhatsApp
+              </a>
+              <button
+                type="button"
+                className="text-sm text-muted-foreground underline underline-offset-4"
+                onClick={() => {
+                  setOrderCode(null);
+                  setWhatsAppLink(null);
+                  setName("");
+                  setPhone("");
+                  setPrivacyConsent(false);
+                }}
+              >
+                Cerrar confirmación
+              </button>
+            </div>
+          ) : items.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-2 px-4 text-center text-sm text-muted-foreground">
               <ShoppingBag className="size-8 text-muted-foreground/50" />
               Tu carrito está vacío
@@ -112,24 +248,62 @@ export function CartDrawer() {
                   <span className="text-foreground">{formatCOP(subtotal)}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  El pago se coordina directamente por WhatsApp con Burgos
-                  Peluquería.
+                  Guardaremos el pedido y coordinaremos el pago por WhatsApp.
                 </p>
-                <Button
-                  nativeButton={false}
-                  render={
-                    <Link
-                      href={getCartWhatsAppLink(items)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setOpen(false)}
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <label className="block space-y-1">
+                    <span className="text-xs font-medium">Nombre</span>
+                    <input
+                      value={name}
+                      onChange={(event) => setName(event.target.value)}
+                      required
+                      minLength={2}
+                      maxLength={100}
+                      autoComplete="name"
+                      className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
-                  }
-                  className="w-full rounded-full bg-[#25D366] text-white hover:bg-[#1ebe5a] hover:text-white"
-                >
-                  <ShoppingBag className="size-4" />
-                  Enviar pedido por WhatsApp
-                </Button>
+                  </label>
+                  <label className="block space-y-1">
+                    <span className="text-xs font-medium">Teléfono</span>
+                    <input
+                      value={phone}
+                      onChange={(event) => setPhone(event.target.value)}
+                      type="tel"
+                      required
+                      minLength={7}
+                      maxLength={20}
+                      autoComplete="tel"
+                      className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    />
+                  </label>
+                  <label className="flex items-start gap-2 text-xs text-muted-foreground">
+                    <input
+                      type="checkbox"
+                      required
+                      checked={privacyConsent}
+                      onChange={(event) =>
+                        setPrivacyConsent(event.target.checked)
+                      }
+                      className="mt-0.5 accent-primary"
+                    />
+                    <span>
+                      Autorizo el uso de mis datos para gestionar este pedido.
+                    </span>
+                  </label>
+                  {error && (
+                    <p role="alert" className="text-sm text-destructive">
+                      {error}
+                    </p>
+                  )}
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full rounded-full bg-[#25D366] text-white hover:bg-[#1ebe5a] hover:text-white"
+                  >
+                    <ShoppingBag className="size-4" />
+                    {submitting ? "Guardando pedido…" : "Guardar y enviar pedido"}
+                  </Button>
+                </form>
               </SheetFooter>
             </>
           )}
